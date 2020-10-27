@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>java高级编程</title>
+</head>
+<h2>java 多线程</h2>
+
+<h3>并行与并发的理解</h3>
+
+<h4>单核CPU和多核CPU的区别</h4>
+
+<ol>
+    <li>单核CPU，其实是一种假的多线程，因为在一个时间单元内，也只能执行一个线程的任务。
+        例如：虽然有多车道，但是收费站只有一个工作人员在收费，只有收了费才能通过，那么
+        CPU就好比收费人员。如果某个人不想交钱，那么收费人员可以把他“挂起”（晾着他，等
+        他想通了，准备好了钱，再去收费。）但是因为CPU时间单元特别短，因此感觉不出来。
+    </li>
+    <br/>
+    <li>如果是多核的话，才能更好的发挥多线程的效率。（现在的服务器都是多核的）
+        一个Java应用程序java.exe，其实至少三个线程：main()主线程，gc()垃圾回收线程，
+        异常处理线程。当然如果发生异常，会影响主线程。
+    </li>
+    <br/>
+</ol>
+
+
+<h4>并行与并发的理解</h4>
+
+<ol>
+    <li>并行：多个CPU同时执行多个任务。比如：多个人同时做不同的事。</li>
+    <li>并发：一个CPU(采用时间片)同时执行多个任务。比如：秒杀、多个人做同一件事</li>
+</ol>
+
+<h3>创建多线程</h3>
+
+<h4>方式一：继承Thread类的方式</h4>
+
+<ol>
+    <li>创建一个继承于Thread类的子类</li>
+    <li>重写Thread类的run() --> 将此线程执行的操作声明在run()中</li>
+    <li>创建Thread类的子类的对象</li>
+    <li>通过此对象调用start()：①启动当前线程 ② 调用当前线程的run()</li>
+</ol>
+
+<h5>具体实现代码</h5>
+
+<pre>
+//1，创建一个Thread类的子类
+class MyThread extends Thread{
+    //2，重写Thread类的run（）方法
+    public void run(){
+        for(int i = 0;i < 100;i++){
+            if(i % 2 == 0){
+                System.out.println(Thread.currentThread().getName() + i);
+            }
+        }
+    }
+}
+public class ThreadTest {
+    public static void main(String[] args) {
+        //3，创建Thread类的子类的对象
+        MyThread myThread = new MyThread();
+        //4，通过此对象调用start（）方法,作用一：启动当前线程；作用二：调用当前线程的run()方法
+        myThread.start();
+        //我们不能直接调用run（）方法来启动新线程
+        //不可以让已经start()的线程再去执行，这样的话会报异常，可以选择重新创建新的对象
+        MyThread myThread1 = new MyThread();
+        myThread1.start();
+        for(int i = 0;i < 100;i++){
+            if(i % 2 == 0){
+                System.out.println(Thread.currentThread().getName() + i + "*");
+            }
+        }
+    }
+
+}
+</pre>
+>
+
+<h5>说明：</h5>
+
+<ul>
+    <li>我们启动一个线程，必须调用start()，不能调用run()的方式启动线程。</li>
+    <li>如果再启动一个线程，必须重新创建一个Thread子类的对象，调用此对象的start()</li>
+</ul>
+
+<h4>实现Runnable接口的方式</h4>
+
+<ol>
+    <li>创建一个实现了Runnable接口的类</li>
+    <li>实现类去实现Runnable中的抽象方法：run()</li>
+    <li>创建实现类的对象</li>
+    <li>将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象</li>
+    <li>通过Thread类的对象调用start()</li>
+</ol>
+
+<h5>具体实现代码</h5>
+
+<pre>
+  //1，创建一个Runnable的实现类
+class MThread implements Runnable{
+    //2，重写Runnable中的抽象方法
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            if(i % 2 == 0){
+                System.out.println(i);
+            }
+        }
+    }
+}
+public class ThreadTest1 {
+    public static void main(String[] args) {
+        //3，创建实现类的对象
+        MThread m1 = new MThread();
+        //4，通过将实现类的对象传递到Thread类的构造器，创建一个Thread类的对象
+        Thread t1 = new Thread(m1);
+        // 5，通过Thread类的对象调用start（）方法
+        t1.start();
+    }
+}
+</pre>
+
+<h3>Thread类中的常用方法</h3>
+
+<h4>常用方法具体代码测试</h4>
+
+<pre>
+/**
+ * 测试Thread中常用方法
+ * 1，Start（）  （1），启动当前线程，使用当前线程的run（）方法
+ * 2，run（）方法  通常需要重写Thread中的run（）方法，将创建的线程要执行的操作声明在此方法中
+ * 3，currentThread（）  方法，是一个静态方法（可以通过类调用），返回当前执行代码的线程
+ * 4，getName（）  获取当前线程的名字
+ * 5，setName（）  设置当前现成的名字
+ * 6，yield（）   释放当前CPU的执行权
+ * 7，join()    在线程A中调用线程B的join（）方法，此时线程A就进入阻塞状态，直到线程B执行完之后，接着执行线程A
+ * 8，stop（）   当执行此方法时，强制结束此线程
+ * 9，sleep（）   让当前线程睡眠，指定毫秒数，在指定的毫秒时间内，当前的线程时阻塞状态
+ * 10，isAlive（）   判断当前线程是否存活
+ *
+ */
+</pre>
+
+<h3>现成的同步机制</h3>
+
+<h4>同步代码块</h4>
+
+<pre style="font-size: 14px">
+/**
+ * @author Eric    Email: doeric@sina.com
+ * @creat 2020-09-15-19:38
+ * @description 三个窗口同时售票之继承Thread类（同步代码块）
+ */
+class Window extends Thread {
+    private static int ticket = 100;
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (Window.class) {//Window.class充当了同步监视器
+                System.out.println(Thread.currentThread().getName() + ":" + ticket);
+                ticket--;
+            }
+        }
+    }
+}
+
+public class WindowTest {
+    public static void main(String[] args) {
+        Window w1 = new Window();
+        Window w2 = new Window();
+        Window w3 = new Window();
+
+        w1.setName("窗口一");
+        w2.setName("窗口二");
+        w3.setName("窗口三");
+
+        w1.start();
+        w2.start();
+        w3.start();
+
+    }
+}
+
+    *****************************************************************
+
+/**
+ * @author Eric    Email: doeric@sina.com
+ * @creat 2020-09-15-19:59
+ * @description  三个窗口同时售票之实现runnable接口（同步代码块）
+ */
+class Window2 implements Runnable{
+    private int ticket = 100;
+    @Override
+    public void run() {
+        while(true){
+            synchronized(this){
+                if(ticket > 0){
+                    System.out.println(Thread.currentThread().getName() + ":" + ticket);
+                    ticket--;
+                }else{
+                    break;
+                }
+            }
+        }
+    }
+}
+public class WindowTest2 {
+    public static void main(String[] args) {
+        Window2 w = new Window2();
+
+        Thread t1 = new Thread(w);
+        Thread t2 = new Thread(w);
+        Thread t3 = new Thread(w);
+
+        t1.setName("窗口一");
+        t2.setName("窗口二");
+        t3.setName("窗口三");
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+}
+</pre>
+
+<h4>同步方法</h4>
+
+<pre>
+/**
+ * @author Eric    Email: doeric@sina.com
+ * @creat 2020-09-15-19:46
+ * @description  三个窗口同时售票之继承Thread类（同步方法）
+ */
+class Window1 extends Thread{
+    private static int ticket = 100;
+    private static synchronized void show(){//静态的方法中只能调用静态的方法和属性
+        if (ticket > 0){
+            System.out.println(Thread.currentThread().getName() + ":" + ticket);
+            ticket--;
+        }
+    }
+    @Override
+    public void run() {
+        while(true){
+            show();
+        }
+    }
+}
+public class WindowTest1 {
+    public static void main(String[] args) {
+        Window1 w1 = new Window1();
+        Window1 w2 = new Window1();
+        Window1 w3 = new Window1();
+
+        w1.setName("窗口一");
+        w2.setName("窗口二");
+        w3.setName("窗口三");
+
+        w1.start();
+        w2.start();
+        w3.start();
+
+    }
+}
+
+    ***********************************************************************
+
+/**
+ * @author Eric    Email: doeric@sina.com
+ * @creat 2020-09-15-20:07
+ * @description    三个窗口同时售票之实现runnable接口（同步方法）
+ */
+class Window3 implements Runnable{
+    private int ticket = 100;
+    @Override
+    public void run() {
+        while(true){
+            show();
+
+        }
+
+    }
+    private synchronized void show(){
+        if(ticket > 0){
+            try {
+                Thread.sleep(50);//这里sleep()方法得用Thread类来调用，因为目前所在环境与Thread类没有直接关系
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + ":" + ticket);
+            ticket--;
+        }
+    }
+}
+public class WindowTest3 {
+    public static void main(String[] args) {
+        Window3 w = new Window3();
+
+        Thread t1 = new Thread(w);
+        Thread t2 = new Thread(w);
+        Thread t3 = new Thread(w);
+
+        t1.setName("窗口一");
+        t2.setName("窗口二");
+        t3.setName("窗口三");
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+}
+</pre>
+
+<h2>java 常用类</h2>
+
+<h3>String类</h3>
+
+<h4>概述</h4>
+
+<ol>
+    <li>String声明为final的，不可被继承</li>
+    <li>String实现了Serializable接口：表示字符串是支持序列化的。<br/>
+        实现了Comparable接口：表示String可以比较大小
+    </li>
+    <li>String内部定义了final char[] value用于存储字符串数据</li>
+    <li>通过字面量的方式（区别于new给一个字符串赋值，此时的字符串值声明在字符串常量池中)</li>
+    <li>字符串常量池中是不会存储相同内容(使用String类的equals()比较，返回true)的字符串的。</li>
+</ol>
+
+<h4>String的不可变性</h4>
+
+<h5>说明</h5>
+
+<ol>
+    <li>当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值。</li>
+    <li>当对现的字符串进行连接操作时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。</li>
+    <li>当调用String的replace()方法修改指定字符或字符串时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。</li>
+</ol>
+
+<h5>代码举例</h5>
+
+<pre>
+    String s1 = "abc";//字面量的定义方式
+    String s2 = "abc";
+    s1 = "hello";
+
+    System.out.println(s1 == s2);//比较s1和s2的地址值
+
+    System.out.println(s1);//hello
+    System.out.println(s2);//abc
+
+    System.out.println("*****************");
+
+    String s3 = "abc";
+    s3 += "def";
+    System.out.println(s3);//abcdef
+    System.out.println(s3);
+
+    System.out.println("*****************");
+
+    String s4 = "abc";
+    String s5 = s4.replace('a', 'm');
+    System.out.println(s4);//abc
+    System.out.println(s5);//mbc
+</pre>
+
+<h3>String实例化的不同方式</h3>
+
+<h4>方式说明</h4>
+
+<ol>
+    <li>通过字面量定义的方式</li>
+    <li>通过new + 构造器的方式</li>
+</ol>
+
+<h5>代码举例</h5>
+
+<pre>
+    //通过字面量定义的方式：此时的s1和s2的数据javaEE声明在方法区中的字符串常量池中。
+    String s1 = "javaEE";
+    String s2 = "javaEE";
+    //通过new + 构造器的方式:此时的s3和s4保存的地址值，是数据在堆空间中开辟空间以后对应的地址值。
+    String s3 = new String("javaEE");
+    String s4 = new String("javaEE");
+
+    System.out.println(s1 == s2);//true
+    System.out.println(s1 == s3);//false
+    System.out.println(s1 == s4);//false
+    System.out.println(s3 == s4);//false
+</pre>
+
+<h4>字符串拼接方式赋值的对比</h4>
+
+<h5>说明</h5>
+
+<ol>
+    <li>常量与常量的拼接结果在常量池。且常量池中不会存在相同内容的常量。</li>
+    <li>只要其中一个是变量，结果就在堆中。</li>
+    <li>如果拼接的结果调用intern()方法，返回值就在常量池中</li>
+</ol>
+
+<h5>代码举例</h5>
+
+<pre>
+String s1 = "javaEE";
+String s2 = "hadoop";
+
+String s3 = "javaEEhadoop";
+String s4 = "javaEE" + "hadoop";
+String s5 = s1 + "hadoop";
+String s6 = "javaEE" + s2;
+String s7 = s1 + s2;
+
+System.out.println(s3 == s4);//true
+System.out.println(s3 == s5);//false
+System.out.println(s3 == s6);//false
+System.out.println(s3 == s7);//false
+System.out.println(s5 == s6);//false
+System.out.println(s5 == s7);//false
+System.out.println(s6 == s7);//false
+
+String s8 = s6.intern();//返回值得到的s8使用的常量值中已经存在的“javaEEhadoop”
+System.out.println(s3 == s8);//true
+****************************
+String s1 = "javaEEhadoop";
+String s2 = "javaEE";
+String s3 = s2 + "hadoop";
+System.out.println(s1 == s3);//false
+
+final String s4 = "javaEE";//s4:常量
+String s5 = s4 + "hadoop";
+System.out.println(s1 == s5);//true
+</pre>
+
+<h4>String常用方法的使用</h4>
+
+<pre>
+import org.junit.jupiter.api.Test;
+
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * @author Eric    Email: doeric@sina.com
+ * @creat 2020-09-22-8:52 AM
+ * @description 常用方法的使用
+ */
+public class StringTest3 {
+
+    @Test
+    /**
+     * 替换
+     * 1，String replace(char oldChar, char newChar)：返回一个新的字符串，
+     *     它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。
+     * 2，String replace(CharSequence target, CharSequence replacement)：
+     *     使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。
+     * 3，String replaceAll(String regex, String replacement)：使用给定的
+     *     replacement 替换此字符串所匹配给定的正则表达式的子字符串。
+     * 4，String replaceFirst(String regex, String replacement)：使用给定
+     *     的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。
+     * 匹配:
+     * 5，boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式。
+     * 切片：
+     * 6，String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串。
+     * 7，String[] split(String regex, int limit)：根据匹配给定的正则表达式来
+     *     拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中。
+     */
+    public void test3() {
+
+        String str1 = "helloworld";
+        //String replace(char oldChar, char newChar)：返回一个新的字符串，
+        //它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。
+        String replace = str1.replace("w", "j");
+        System.out.println("replace:" + replace);
+
+        //String replace(CharSequence target, CharSequence replacement)：
+        //使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。
+        String hello = str1.replace("hello", "你好！");
+        System.out.println("replace(字符串替换):" + hello);//这里输出依然是“你好，world”，而不是“你好，jorld”体现了String的不可变性
+
+
+        //String replaceFirst(String regex, String replacement)：使用给定
+        //的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。
+
+
+    }
+
+
+    @Test
+    /**
+     * boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束
+     * boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始
+     * boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始
+     * boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true
+     * int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引
+     * int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始
+     * int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引
+     * int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索
+     */
+    public void test2() {
+        String str1 = "hanamura.Eric";
+        String str2 = "Like.hanamura";
+        String str3 = "hanamura";
+        //boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束
+        boolean endsWith = str1.endsWith("Eric");
+        System.out.println("endsWith:" + endsWith);
+        //boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始
+        boolean startsWith = str2.startsWith("Like");
+        System.out.println("startsWith:" + startsWith);
+        //boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始
+        boolean b = str3.startsWith("a", 3);
+        System.out.println("startsWith(含索引):" + b);
+        //boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true
+        boolean hana = str1.contains("hana");
+        System.out.println("contains:" + hana);
+        //int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引
+        int hana1 = str2.indexOf("hana");
+        System.out.println("indexOf(从头开始索引)" + hana1);
+        //int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始
+        int hana2 = str2.indexOf("hana", 3);
+        System.out.println("indexOf(从指定元素开始索引)" + hana2);
+        //int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引
+        //int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索
+
+
+    }
+
+
+    @Test
+
+    /**
+     * 1, int length()：返回字符串的长度： return value.length
+     * 2, char charAt(int index)： 返回某索引处的字符return value[index]
+     * 3, boolean isEmpty()：判断是否是空字符串：return value.length == 0
+     * 4, String toLowerCase()：使用默认语言环境，将 String 中的所字符转换为小写
+     * 5, String toUpperCase()：使用默认语言环境，将 String 中的所字符转换为大写
+     * 6, String trim()：返回字符串的副本，忽略前导空白和尾部空白
+     * 7, boolean equals(Object obj)：比较字符串的内容是否相同
+     * 8, boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写
+     * 9, String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”
+     * 10, int compareTo(String anotherString)：比较两个字符串的大小
+     * 11, String substring(int beginIndex)：返回一个新的字符串，它是此字符串的
+     *  从beginIndex开始截取到最后的一个子字符串。
+     * 12,String substring(int beginIndex, int endIndex) ：返回一个新字符串，它是此
+     *  字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。
+     */
+    public void test1() {
+        String str1 = "hello";
+        String str2 = new String("java");
+        String str3 = "";
+        String str4 = "ABcvhKM";
+        String str5 = "   abc   ";
+        //int length()：返回字符串的长度： return value.length
+        int length = str1.length();
+        System.out.println("length:" + length);
+        //char charAt(int index)： 返回某索引处的字符return value[index]
+        char c = str2.charAt(3);
+        System.out.println("charAt:" + c);
+        //boolean isEmpty()：判断是否是空字符串：return value.length == 0
+        boolean empty = str3.isEmpty();
+        System.out.println("empty:" + empty);
+        //String toLowerCase()：使用默认语言环境，将 String 中的所有字符转换为小写
+        String s = str4.toLowerCase();
+        System.out.println("toLowerCase:" + s);
+        //String toUpperCase()：使用默认语言环境，将 String 中的所有字符转换为大写
+        String s1 = str4.toUpperCase();
+        System.out.println("toUpperCase:" + s1);
+        //String trim()：返回字符串的副本，忽略前导空白和尾部空白
+        String trim = str5.trim();
+        System.out.println("trim:" + trim);
+        //boolean equals(Object obj)：比较字符串的内容是否相同
+        boolean equals = str1.equals(str5);
+        //另有boolean equalsIgnoreCase(String anotherString)
+        //可忽略大小写判断字符串是否相等
+        System.out.println("equals:" + equals);
+        //String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”
+        String concat = str1.concat(str2);
+        System.out.println("concat:" + concat);
+        //int compareTo(String anotherString)：比较两个字符串的大小
+        int i = str1.compareTo(str3);
+        System.out.println("compareTo:" + i);
+        //String substring(int beginIndex)：返回一个新的字符串，它是此字符串的从beginIndex开始截取到最后的一个子字符串。
+        String substring = str1.substring(2);
+        System.out.println("subString:" + substring);
+        //String substring(int beginIndex, int endIndex) ：返回一个新字符串，
+        //它是此字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。
+        String substring1 = str1.substring(1, 5);
+        System.out.println("subString(含末尾):" + substring1);
+
+    }
+}
+
+</pre>
+
+<h3>StringBuffer & StringBuilder</h3>
+
+<h4>String、StringBuffer、StringBuilder三者的对比</h4>
+
+<ol>
+    <li>String:不可变的字符序列；底层使用char[]存储</li>
+    <li>StringBuffer:可变的字符序列；线程安全的，效率低；底层使用char[]存储</li>
+    <li>StringBuilder:可变的字符序列；jdk5.0新增的，线程不安全的，效率高；底层使用char[]存储</li>
+</ol>
+
+<h4>StringBuffer & StringBuilder 常用方法</h4>
+
+<ul>
+    <li>增：append(xxx)</li>
+    <li>删：delete(int start,int end)</li>
+    <li>改：setCharAt(int n ,char ch) / replace(int start, int end, String str)</li>
+    <li>查：charAt(int n )</li>
+    <li>插：insert(int offset, xxx)</li>
+    <li>长度：length();</li>
+    <li>遍历：for() + charAt() / toString()</li>
+</ul>
+
+
+
+<h2>java 枚举类</h2>
+<h2>java 中的注解</h2>
+<h2>Java 泛型</h2>
+<h2>java 集合</h2>
+<h2>java IO流</h2>
+<h2>java 网络编程</h2>
+<h2>java 反射机制</h2>
+<h2>java java8新特性</h2>
+<h2>java java9 & java10新特性</h2>
+</html>
