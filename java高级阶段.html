@@ -3,8 +3,51 @@
 <head>
     <meta charset="utf-8">
     <title>java高级编程</title>
+    <style>
+        #box1{
+            position: absolute;
+            top: 30px;
+            left: 10px;
+            width: 250px;
+
+        }
+        #box2{
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            width: 1000px;
+        }
+    </style>
+    
+
+
 </head>
-<h2>java 多线程</h2>
+<body>
+    <div id="box1">
+       
+        <ul>
+            <li><a href="#08">java 多线程</a></li>
+            <li><a href="#09">java 常用类</a></li>
+            <li><a href="#10">java 枚举类和注解</a></li>
+            <li><a href="#11">java 集合</a></li>
+            <li><a href="#12">java 泛型</a></li>
+            <li><a href="#13">java IO流</a></li>
+            <li><a href="#14">java 反射机制</a></li>
+            <li><a href="#15">java java8新特性</a></li>
+            <li><a href="#16">java java9 & java10新特性</a></li>
+        </ul>
+    </div>
+
+
+
+
+    
+   <div id="box2">
+        <h1>java 高级阶段</h1>
+
+        <br>
+
+<h2 id="08">java 多线程</h2>
 
 <h3>并行与并发的理解</h3>
 
@@ -69,7 +112,7 @@ public class ThreadTest {
         myThread1.start();
         for(int i = 0;i < 100;i++){
             if(i % 2 == 0){
-                System.out.println(Thread.currentThread().getName() + i + "*");
+                System.out.println(Thread.currentThread().getName() + i + "");
             }
         }
     }
@@ -127,20 +170,20 @@ public class ThreadTest1 {
 <h4>常用方法具体代码测试</h4>
 
 <pre>
-/**
- * 测试Thread中常用方法
- * 1，Start（）  （1），启动当前线程，使用当前线程的run（）方法
- * 2，run（）方法  通常需要重写Thread中的run（）方法，将创建的线程要执行的操作声明在此方法中
- * 3，currentThread（）  方法，是一个静态方法（可以通过类调用），返回当前执行代码的线程
- * 4，getName（）  获取当前线程的名字
- * 5，setName（）  设置当前现成的名字
- * 6，yield（）   释放当前CPU的执行权
- * 7，join()    在线程A中调用线程B的join（）方法，此时线程A就进入阻塞状态，直到线程B执行完之后，接着执行线程A
- * 8，stop（）   当执行此方法时，强制结束此线程
- * 9，sleep（）   让当前线程睡眠，指定毫秒数，在指定的毫秒时间内，当前的线程时阻塞状态
- * 10，isAlive（）   判断当前线程是否存活
- *
- */
+/
+  测试Thread中常用方法
+  1，Start（）  （1），启动当前线程，使用当前线程的run（）方法
+  2，run（）方法  通常需要重写Thread中的run（）方法，将创建的线程要执行的操作声明在此方法中
+  3，currentThread（）  方法，是一个静态方法（可以通过类调用），返回当前执行代码的线程
+  4，getName（）  获取当前线程的名字
+  5，setName（）  设置当前现成的名字
+  6，yield（）   释放当前CPU的执行权
+  7，join()    在线程A中调用线程B的join（）方法，此时线程A就进入阻塞状态，直到线程B执行完之后，接着执行线程A
+  8，stop（）   当执行此方法时，强制结束此线程
+  9，sleep（）   让当前线程睡眠，指定毫秒数，在指定的毫秒时间内，当前的线程时阻塞状态
+  10，isAlive（）   判断当前线程是否存活
+ 
+ /
 </pre>
 
 <h3>现成的同步机制</h3>
@@ -148,11 +191,11 @@ public class ThreadTest1 {
 <h4>同步代码块</h4>
 
 <pre style="font-size: 14px">
-/**
- * @author Eric    Email: doeric@sina.com
- * @creat 2020-09-15-19:38
- * @description 三个窗口同时售票之继承Thread类（同步代码块）
- */
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-09-15-19:38
+  @description 三个窗口同时售票之继承Thread类（同步代码块）
+ /
 class Window extends Thread {
     private static int ticket = 100;
 
@@ -184,13 +227,13 @@ public class WindowTest {
     }
 }
 
-    *****************************************************************
+    
 
-/**
- * @author Eric    Email: doeric@sina.com
- * @creat 2020-09-15-19:59
- * @description  三个窗口同时售票之实现runnable接口（同步代码块）
- */
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-09-15-19:59
+  @description  三个窗口同时售票之实现runnable接口（同步代码块）
+ /
 class Window2 implements Runnable{
     private int ticket = 100;
     @Override
@@ -230,11 +273,11 @@ public class WindowTest2 {
 <h4>同步方法</h4>
 
 <pre>
-/**
- * @author Eric    Email: doeric@sina.com
- * @creat 2020-09-15-19:46
- * @description  三个窗口同时售票之继承Thread类（同步方法）
- */
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-09-15-19:46
+  @description  三个窗口同时售票之继承Thread类（同步方法）
+ /
 class Window1 extends Thread{
     private static int ticket = 100;
     private static synchronized void show(){//静态的方法中只能调用静态的方法和属性
@@ -267,13 +310,13 @@ public class WindowTest1 {
     }
 }
 
-    ***********************************************************************
+    
 
-/**
- * @author Eric    Email: doeric@sina.com
- * @creat 2020-09-15-20:07
- * @description    三个窗口同时售票之实现runnable接口（同步方法）
- */
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-09-15-20:07
+  @description    三个窗口同时售票之实现runnable接口（同步方法）
+ /
 class Window3 implements Runnable{
     private int ticket = 100;
     @Override
@@ -316,7 +359,7 @@ public class WindowTest3 {
 }
 </pre>
 
-<h2>java 常用类</h2>
+<h2 id="09">java 常用类</h2>
 
 <h3>String类</h3>
 
@@ -354,14 +397,14 @@ public class WindowTest3 {
     System.out.println(s1);//hello
     System.out.println(s2);//abc
 
-    System.out.println("*****************");
+    System.out.println("");
 
     String s3 = "abc";
     s3 += "def";
     System.out.println(s3);//abcdef
     System.out.println(s3);
 
-    System.out.println("*****************");
+    System.out.println("");
 
     String s4 = "abc";
     String s5 = s4.replace('a', 'm');
@@ -426,7 +469,7 @@ System.out.println(s6 == s7);//false
 
 String s8 = s6.intern();//返回值得到的s8使用的常量值中已经存在的“javaEEhadoop”
 System.out.println(s3 == s8);//true
-****************************
+
 String s1 = "javaEEhadoop";
 String s2 = "javaEE";
 String s3 = s2 + "hadoop";
@@ -445,31 +488,31 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * @author Eric    Email: doeric@sina.com
- * @creat 2020-09-22-8:52 AM
- * @description 常用方法的使用
- */
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-09-22-8:52 AM
+  @description 常用方法的使用
+ /
 public class StringTest3 {
 
     @Test
-    /**
-     * 替换
-     * 1，String replace(char oldChar, char newChar)：返回一个新的字符串，
-     *     它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。
-     * 2，String replace(CharSequence target, CharSequence replacement)：
-     *     使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。
-     * 3，String replaceAll(String regex, String replacement)：使用给定的
-     *     replacement 替换此字符串所匹配给定的正则表达式的子字符串。
-     * 4，String replaceFirst(String regex, String replacement)：使用给定
-     *     的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。
-     * 匹配:
-     * 5，boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式。
-     * 切片：
-     * 6，String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串。
-     * 7，String[] split(String regex, int limit)：根据匹配给定的正则表达式来
-     *     拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中。
-     */
+    /
+      替换
+      1，String replace(char oldChar, char newChar)：返回一个新的字符串，
+          它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。
+      2，String replace(CharSequence target, CharSequence replacement)：
+          使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。
+      3，String replaceAll(String regex, String replacement)：使用给定的
+          replacement 替换此字符串所匹配给定的正则表达式的子字符串。
+      4，String replaceFirst(String regex, String replacement)：使用给定
+          的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。
+      匹配:
+      5，boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式。
+      切片：
+      6，String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串。
+      7，String[] split(String regex, int limit)：根据匹配给定的正则表达式来
+          拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中。
+     /
     public void test3() {
 
         String str1 = "helloworld";
@@ -492,16 +535,16 @@ public class StringTest3 {
 
 
     @Test
-    /**
-     * boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束
-     * boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始
-     * boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始
-     * boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true
-     * int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引
-     * int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始
-     * int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引
-     * int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索
-     */
+    /
+      boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束
+      boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始
+      boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始
+      boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true
+      int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引
+      int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始
+      int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引
+      int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索
+     /
     public void test2() {
         String str1 = "hanamura.Eric";
         String str2 = "Like.hanamura";
@@ -533,22 +576,22 @@ public class StringTest3 {
 
     @Test
 
-    /**
-     * 1, int length()：返回字符串的长度： return value.length
-     * 2, char charAt(int index)： 返回某索引处的字符return value[index]
-     * 3, boolean isEmpty()：判断是否是空字符串：return value.length == 0
-     * 4, String toLowerCase()：使用默认语言环境，将 String 中的所字符转换为小写
-     * 5, String toUpperCase()：使用默认语言环境，将 String 中的所字符转换为大写
-     * 6, String trim()：返回字符串的副本，忽略前导空白和尾部空白
-     * 7, boolean equals(Object obj)：比较字符串的内容是否相同
-     * 8, boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写
-     * 9, String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”
-     * 10, int compareTo(String anotherString)：比较两个字符串的大小
-     * 11, String substring(int beginIndex)：返回一个新的字符串，它是此字符串的
-     *  从beginIndex开始截取到最后的一个子字符串。
-     * 12,String substring(int beginIndex, int endIndex) ：返回一个新字符串，它是此
-     *  字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。
-     */
+    /
+      1, int length()：返回字符串的长度： return value.length
+      2, char charAt(int index)： 返回某索引处的字符return value[index]
+      3, boolean isEmpty()：判断是否是空字符串：return value.length == 0
+      4, String toLowerCase()：使用默认语言环境，将 String 中的所字符转换为小写
+      5, String toUpperCase()：使用默认语言环境，将 String 中的所字符转换为大写
+      6, String trim()：返回字符串的副本，忽略前导空白和尾部空白
+      7, boolean equals(Object obj)：比较字符串的内容是否相同
+      8, boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写
+      9, String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”
+      10, int compareTo(String anotherString)：比较两个字符串的大小
+      11, String substring(int beginIndex)：返回一个新的字符串，它是此字符串的
+       从beginIndex开始截取到最后的一个子字符串。
+      12,String substring(int beginIndex, int endIndex) ：返回一个新字符串，它是此
+       字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。
+     /
     public void test1() {
         String str1 = "hello";
         String str2 = new String("java");
@@ -619,15 +662,2684 @@ public class StringTest3 {
     <li>遍历：for() + charAt() / toString()</li>
 </ul>
 
+<h3>JDK8之前的时间API</h3>
+
+<h4>获取系统当前时间</h4>
+
+<pre>
+    //System类中的currentTimeMillis()
+
+    long time = System.currentTimeMillis();
+    //返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。
+    //称为时间戳
+    System.out.println(time);
+
+</pre>
+
+<h4>java.util.Date类与java.sql.Date类</h4>
+
+<pre>
+    /
+    java.util.Date类
+    |---java.sql.Date类
+    
+    1.两个构造器的使用
+    >构造器一：Date()：创建一个对应当前时间的Date对象
+    >构造器二：创建指定毫秒数的Date对象
+    2.两个方法的使用
+    >toString():显示当前的年、月、日、时、分、秒
+    >getTime():获取当前Date对象对应的毫秒数。（时间戳）
+    
+    3. java.sql.Date对应着数据库中的日期类型的变量
+    >如何实例化
+    >如何将java.util.Date对象转换为java.sql.Date对象
+    /
+    @Test
+    public void test2(){
+    //构造器一：Date()：创建一个对应当前时间的Date对象
+    Date date1 = new Date();
+    System.out.println(date1.toString());//Sat Feb 16 16:35:31 GMT+08:00 2019
+    
+    System.out.println(date1.getTime());//1550306204104
+    
+    //构造器二：创建指定毫秒数的Date对象
+    Date date2 = new Date(155030620410L);
+    System.out.println(date2.toString());
+    
+    //创建java.sql.Date对象
+    java.sql.Date date3 = new java.sql.Date(35235325345L);
+    System.out.println(date3);//1971-02-13
+    
+    //如何将java.util.Date对象转换为java.sql.Date对象
+    //情况一：
+    // Date date4 = new java.sql.Date(2343243242323L);
+    // java.sql.Date date5 = (java.sql.Date) date4;
+    //情况二：
+    Date date6 = new Date();
+    java.sql.Date date7 = new java.sql.Date(date6.getTime());
+    
+    
+    }
+
+</pre>
+
+<h4>java.text.SimpleDataFormat类</h4>
+
+<pre>
+    /
+    SimpleDateFormat对日期Date类的格式化和解析
+    1.两个操作：
+    1.1 格式化：日期 --->字符串
+    1.2 解析：格式化的逆过程，字符串 ---> 日期
+    
+    2.SimpleDateFormat的实例化:new + 构造器
+    /
+    
+    //照指定的方式格式化和解析：调用带参的构造器
+    // SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyy.MMMMM.dd GGG hh:mm aaa");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    //格式化
+    String format1 = sdf1.format(date);
+    System.out.println(format1);//2019-02-18 11:48:27
+    //解析:要求字符串必须是符合SimpleDateFormat识别的格式(通过构造器参数体现),
+    //否则，抛异常
+    Date date2 = sdf1.parse("2020-02-18 11:48:27");
+    System.out.println(date2);
+
+</pre>
+
+<h4>Calendar类：日历类、抽象类</h4>
+
+<pre>
+    //1.实例化
+    //方式一：创建其子类（GregorianCalendar的对象
+    //方式二：调用其静态方法getInstance()
+    Calendar calendar = Calendar.getInstance();
+    // System.out.println(calendar.getClass());
+    
+    //2.常用方法
+    //get()
+    int days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+    System.out.println(calendar.get(Calendar.DAY_OF_YEAR));
+    
+    //set()
+    //calendar可变性
+    calendar.set(Calendar.DAY_OF_MONTH,22);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+    
+    //add()
+    calendar.add(Calendar.DAY_OF_MONTH,-3);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+    
+    //getTime():日历类---> Date
+    Date date = calendar.getTime();
+    System.out.println(date);
+    
+    //setTime():Date ---> 日历类
+    Date date1 = new Date();
+    calendar.setTime(date1);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+
+</pre>
+
+<h3>JDK8中新日期时间API</h3>
+
+<h4>相关代码</h4>
+
+<pre>
+    package cn.hanamura.datetime;
+    
+    import org.junit.jupiter.api.Test;
+    
+    import java.time.DayOfWeek;
+    import java.time.LocalDate;
+    import java.time.LocalDateTime;
+    import java.time.LocalTime;
+    import java.util.Date;
+    
+    /
+     @author Eric Email: doeric@sina.com
+     @creat 2020-09-23-2:05 PM
+     @description
+    /
+    public class JDK8DateTimeTest {
+    // @Test
+    // public void test(){
+    // Date date = new Date(2020 - 81900,9 - 1,8);
+    // System.out.println(date);
+    // }
+    
+    @Test
+    //LocalDate,LocalTime,LocalDateTime的使用
+    //说明：LocalDateTime相对而言使用较多
+    public void test1(){
+    //now()获取当前的时间
+    LocalDate localDate = LocalDate.now();
+    LocalTime localTime = LocalTime.now();
+    LocalDateTime localDateTime = LocalDateTime.now();
+    
+    System.out.println(localDate);
+    System.out.println(localTime);
+    System.out.println(localDateTime);
+    
+    //of(),设置指定的年月日，时分秒，并且没有偏移量
+    LocalDateTime localDateTime1 = LocalDateTime.of(2020, 10, 1, 12, 12);
+    System.out.println(localDateTime1);
+    
+    //getXxx()
+    int dayOfMonth = localDateTime.getDayOfMonth();
+    DayOfWeek dayOfWeek = localDateTime.getDayOfWeek();
+    System.out.println(dayOfMonth);
+    System.out.println(dayOfWeek);
+    
+    //with()
+    LocalDateTime localDateTime2 = localDateTime.withDayOfMonth(10);
+    System.out.println(localDateTime2);
+    System.out.println(localDateTime);
+    
+    //plus()
+    LocalDateTime localDateTime3 = localDateTime.plusDays(4);
+    System.out.println(localDateTime3);
+    System.out.println(localDateTime);
+    
+    //minus()
+    LocalDateTime localDateTime4 = localDateTime.minusHours(3);
+    System.out.println(localDateTime4);
+    System.out.println(localDateTime);
+    }
+    }
+
+</pre>
+
+<pre>
+    package cn.hanamura.datetime;
+    
+    import org.junit.jupiter.api.Test;
+    
+    import java.time.LocalDateTime;
+    import java.time.format.DateTimeFormatter;
+    import java.time.temporal.TemporalAccessor;
+    
+    /
+     @author Eric Email: doeric@sina.com
+     @creat 2020-09-23-2:46 PM
+     @description 格式化或解析日期或时间
+    /
+    public class DateTimeFomatterTest {
+    @Test
+    public void test(){
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy,MM,dd hh:mm:ss");
+    //格式化
+    String str4 = dateTimeFormatter.format(LocalDateTime.now());
+    System.out.println(str4);
+    //解析
+    TemporalAccessor accessor = dateTimeFormatter.parse("2020,09,23 03:04:52");
+    System.out.println(accessor);
+    
+    }
+    }
+
+</pre>
+
+<h3>java 比较器</h3>
+
+<h4>自然排序</h4>
+
+<pre>
+    package cn.hanamura.compare;
+    
+    import org.junit.jupiter.api.Test;
+    
+    import java.util.Arrays;
+    
+    /
+     @author Eric Email: doeric@sina.com
+     @creat 2020-09-23-3:22 PM
+     @description
+     说明：
+     1，java中的对象，正常情况下只能进行：== 或者！=，不能使用<,>的比较，，如果要实现大小的比较就要去
+         实现Comparable或者Comparator
+         2，comparable接口的使用
+        /
+        public class CompareTest {
+        @Test
+        /
+         1，像String，包装类等实现了Comparable接口，重写了comparreto（）方法，给出了比较两个对象大小的方法
+         2.像String、包装类重写compareTo()方法以后，进行了从小到大的排列
+         3. 重写compareTo(obj)的规则：
+         如果当前对象this大于形参对象obj，则返回正整数，
+         如果当前对象this小于形参对象obj，则返回负整数，
+         如果当前对象this等于形参对象obj，则返回零。
+         4，对于自定义类，如果需要排序，我们需要让自定义类去重写Comparable接口，并且重写CompareTo（）方法，
+         并在其中声明排序方法
+        
+        /
+        public void Test1(){
+        String[] arr = new String[]{"AA","DD","CC","BB","EE"};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+        }
+    
+        @Test
+        public void test2(){
+        Goods[] arr = new Goods[4];
+        arr[0] = new Goods("levenMouse",34);
+        arr[1] = new Goods("Dell",43);
+        arr[2] = new Goods("Mi",13);
+        arr[3] = new Goods("huawei",65);
+    
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+        }
+        }
+
+</pre>
+
+<h4>定制排序</h4>
+
+<pre>
+    package cn.hanamura.compare;
+    
+    import org.junit.jupiter.api.Test;
+    
+    import java.util.Arrays;
+    import java.util.Comparator;
+    
+    /
+     @author Eric Email: doeric@sina.com
+     @creat 2020-09-24-10:33 AM
+     @description Comparator接口的使用，定制排序
+     1，Comparator
+    /
+    public class ComparatorTest {
+    @Test
+    public void test3(){
+    String[] arr = new String[]{"AA","BB","KK","LL","YY","DD"};
+    Arrays.sort(arr,new Comparator(){
+    @Override
+    public int compare(Object o1, Object o2) {
+    if(o1 instanceof String && o2 instanceof String){
+    String s1 = (String)o1;
+    String s2 = (String)o2;
+    return -s1.compareTo(s2);
+    }
+    throw new RuntimeException("输入数据不一致");
+    }
+    });
+    System.out.println(Arrays.toString(arr));
+    }
+    
+    }
+
+</pre>
 
 
-<h2>java 枚举类</h2>
-<h2>java 中的注解</h2>
-<h2>Java 泛型</h2>
-<h2>java 集合</h2>
-<h2>java IO流</h2>
-<h2>java 网络编程</h2>
-<h2>java 反射机制</h2>
-<h2>java java8新特性</h2>
-<h2>java java9 & java10新特性</h2>
+
+<h2 id="10">java 枚举类和注解</h2>
+
+<h3>
+    枚举类的使用
+</h3>
+
+<h4>枚举类的说明：</h4>
+
+<ul>
+    <li>枚举类的理解：类的对象只有有限个，确定的。我们称此类为枚举类</li>
+    <li>当需要定义一组常量时，强烈建议使用枚举类</li>
+    <li>如果枚举类中只一个对象，则可以作为单例模式的实现方式。
+</li>
+</ul>
+
+
+
+<h4>如何自定义枚举类？步骤：</h4>
+
+<pre>
+
+
+//自定义枚举类
+class Season{
+    //1.声明Season对象的属性:private final修饰
+    private final String seasonName;
+    private final String seasonDesc;
+
+    //2.私化类的构造器,并给对象属性赋值
+    private Season(String seasonName,String seasonDesc){
+        this.seasonName = seasonName;
+        this.seasonDesc = seasonDesc;
+    }
+
+    //3.提供当前枚举类的多个对象：public static final的
+    public static final Season SPRING = new Season("春天","春暖花开");
+    public static final Season SUMMER = new Season("夏天","夏日炎炎");
+    public static final Season AUTUMN = new Season("秋天","秋高气爽");
+    public static final Season WINTER = new Season("冬天","冰天雪地");
+
+    //4.其他诉求1：获取枚举类对象的属性
+    public String getSeasonName() {
+        return seasonName;
+    }
+
+    public String getSeasonDesc() {
+        return seasonDesc;
+    }
+    //4.其他诉求1：提供toString()
+    @Override
+    public String toString() {
+        return "Season{" +
+                "seasonName='" + seasonName + '\'' +
+                ", seasonDesc='" + seasonDesc + '\'' +
+                '}';
+    }
+}
+</pre>
+
+
+<h4>jdk 5.0 新增使用enum定义枚举类。步骤：</h4>
+
+<pre>
+
+
+//使用enum关键字枚举类
+    enum Season1 {
+    //1.提供当前枚举类的对象，多个对象之间用","隔开，末尾对象";"结束
+    SPRING("春天","春暖花开"),
+    SUMMER("夏天","夏日炎炎"),
+    AUTUMN("秋天","秋高气爽"),
+    WINTER("冬天","冰天雪地");
+
+    //2.声明Season对象的属性:private final修饰
+    private final String seasonName;
+    private final String seasonDesc;
+
+    //2.私化类的构造器,并给对象属性赋值
+
+    private Season1(String seasonName,String seasonDesc){
+        this.seasonName = seasonName;
+        this.seasonDesc = seasonDesc;
+    }
+
+    //4.其他诉求1：获取枚举类对象的属性
+    public String getSeasonName() {
+        return seasonName;
+    }
+
+    public String getSeasonDesc() {
+        return seasonDesc;
+    }
+
+}
+</pre>
+
+
+
+<h4>
+    使用enum定义枚举类之后，枚举类常用方法：（继承于java.lang.Enum类）
+</h4>
+
+<pre>
+
+
+        Season1 summer = Season1.SUMMER;
+        //toString():返回枚举类对象的名称
+        System.out.println(summer.toString());
+
+//        System.out.println(Season1.class.getSuperclass());
+        System.out.println("");
+        //values():返回所的枚举类对象构成的数组
+        Season1[] values = Season1.values();
+        for(int i = 0;i < values.length;i++){
+            System.out.println(values[i]);
+        }
+        System.out.println("");
+        Thread.State[] values1 = Thread.State.values();
+        for (int i = 0; i < values1.length; i++) {
+            System.out.println(values1[i]);
+        }
+
+        //valueOf(String objName):返回枚举类中对象名是objName的对象。
+        Season1 winter = Season1.valueOf("WINTER");
+        //如果没objName的枚举类对象，则抛异常：IllegalArgumentException
+//        Season1 winter = Season1.valueOf("WINTER1");
+        System.out.println(winter);
+</pre>
+
+<h4>使用enum定义枚举类之后，如何让枚举类对象分别实现接口：</h4>
+
+<pre>
+
+
+interface Info{
+    void show();
+}
+
+//使用enum关键字枚举类
+enum Season1 implements Info{
+    //1.提供当前枚举类的对象，多个对象之间用","隔开，末尾对象";"结束
+    SPRING("春天","春暖花开"){
+        @Override
+        public void show() {
+            System.out.println("春天在哪里？");
+        }
+    },
+    SUMMER("夏天","夏日炎炎"){
+        @Override
+        public void show() {
+            System.out.println("宁夏");
+        }
+    },
+    AUTUMN("秋天","秋高气爽"){
+        @Override
+        public void show() {
+            System.out.println("秋天不回来");
+        }
+    },
+    WINTER("冬天","冰天雪地"){
+        @Override
+        public void show() {
+            System.out.println("大约在冬季");
+        }
+    };
+}
+</pre>
+
+<h3>注解的使用</h3>
+
+<h4>注解的使用实例</h4>
+
+<ul>
+    <li>@Override:限制重写父类的方法，该注解只能用于方法</li>
+    <li>@Deprecated: 用于表示所修饰的元素(类, 方法等)已过时。通常是因为所修饰的结构危险或存在更好的择</li>
+    <li>@SuppressWarnings: 抑制编译器警告</li>
+</ul>
+
+<h4>如何自定义注解</h4>
+<p>参照SuppressWarnings定义</p>
+<ol>
+    <li>注解声明为：@interface</li>
+    <li>内部定义成员，通常使用value表示</li>
+    <li>可以指定成员的默认值，使用default定义</li>
+    <li>如果自定义注解没成员，表明是一个标识作用。</li>
+    <li>如果注解有成员，在使用注解时，要给其赋值</li>
+</ol>
+
+<h4>元注解 ：对现有的注解进行解释说明的注解。</h4>
+
+<ol>
+    <li>Retention：指定所修饰的 Annotation 的生命周期：SOURCE\CLASS（默认行为）\RUNTIME
+    只声明为RUNTIME生命周期的注解，才能通过反射获取。</li>
+    <li>Target:用于指定被修饰的 Annotation 能用于修饰哪些程序元素</li>
+    <li>Documented:表示所修饰的注解在被javadoc解析时，保留下来。</li>
+    <li>Inherited:被它修饰的 Annotation 将具继承性。</li>
+</ol>
+
+<h4>JDK8中注解的新特性：可重复注解，类的注解</h4>
+
+<ol>
+    <h5>可重复注解</h5>
+    <ol>
+        <li>在MyAnnotation上声明@Repeatable，成员值为MyAnnotations.class</li>
+        <li>MyAnnotation的Target和Retention等元注解与MyAnnotations相同。</li>
+    </ol>
+    <h5>类型注解</h5>
+    <ol>
+        <li>ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中（如：泛型声明。</li>
+        <li>ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中。</li>
+    </ol>
+</ol>
+
+<h2 id="11">java 集合</h2>
+
+<h3>数组与集合</h3>
+
+<p>说明：集合与数组都是对多个对象数据进行存储操作的结构，也就是java容器。但这里的存储并不涉及到持久性的存储，而是内存层面的存储</p>
+
+<h3>Collection接口</h3>
+
+<ul>
+    <li>Collection接口:单列集合，用来存储一个个的对象</li>
+    <ol>
+        <li>List接口：存储有序的、可重复的数据。 -->“动态”数组
+            <ul>
+                <li>ArrayList：作为List接口的主要实现类；线程不安全的，效率高；底层使用Object[] elementData存储</li>
+                <li>LinkedList：对于频繁的插入、删除操作，使用此类效率比ArrayList高；底层使用双向链表存储</li>
+                <li>Vector：作为List接口的古老实现类；线程安全的，效率低；底层使用Object[] elementData存储</li>
+            </ul>
+        </li>
+
+        <li>Set接口：存储无序的、不可重复的数据 -->高中讲的“集合”
+            <ul>
+                <li>HashSet：作为Set接口的主要实现类；线程不安全的；可以存储null值</li>
+                <li>LinkedHashSet：作为HashSet的子类；遍历其内部数据时，可以按照添加的顺序遍历在添加数据的同时，每个数据还维护了两个引用，记录此数据前一个数据和后一个数据。 对于频繁的遍历操作，LinkedHashSet效率高于HashSet.</li>
+                <li>TreeSet：可以照添加对象的指定属性，进行排序。</li>
+            </ul>
+        </li>
+    </ol>
+</ul>
+
+<h3>Iterator和foreach</h3>
+
+<h4>Iterator</h4>
+
+<pre>
+    package cn.hanamura.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-08-7:16 PM
+  @description
+  iterator():返回Iterator接口的实例，用于遍历集合元素
+ /
+public class IteratorTest {
+    @Test
+    public void test(){
+        Collection coll = new ArrayList();
+        coll.add(123);
+        coll.add(234);
+        coll.add(789);
+        coll.add("ABC");
+
+        Iterator iterator = coll.iterator();//得到一个迭代器的对象
+        //Iterator接口，迭代器接口
+        //方式一：
+//        System.out.println(iterator.next());
+//        System.out.println(iterator.next());  rup[[[
+//        System.out.println(iterator.next());
+        //方式二：
+//        for (int i = 0; i < coll.size(); i++) {
+//            System.out.println(iterator.next());
+//        }
+        //方式三：（也是最常用的）
+        while(iterator.hasNext()){
+
+            System.out.println(iterator.next());
+
+        }
+        System.out.println("");
+
+        iterator = coll.iterator();
+        while(iterator.hasNext()){
+            Object obj = iterator.next();
+            //删除集合iterator中的元素，此方法不同于集合中的remove
+            if("ABC".equals(obj)){
+                iterator.remove();
+            }
+        }
+        iterator = coll.iterator();
+        while(iterator.hasNext()){
+
+            System.out.println(iterator.next());
+
+        }
+    }
+}
+
+</pre>
+
+<h4>foreach</h4>
+
+<pre>
+    package cn.hanamura.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-13-3:47 PM
+  @description
+  JDK5.0新增的foreach循环，用于遍历集合数组
+ 
+ /
+public class ForTest {
+    @Test
+    public void test1(){
+        Collection coll = new ArrayList();
+        coll.add(123);
+        coll.add(234);
+        coll.add(789);
+        coll.add("ABC");
+        //for(集合元素的类型 局部变量 ： 集合对象)
+        for(Object obj : coll){//这里的obj相当于一个形参，
+            System.out.println(obj);
+        }
+    }
+    @Test
+    public void test2(){
+        int[] arr = new int[]{1,2,3,4,5};
+        for(int i : arr){
+            System.out.println(i);
+        }
+    }
+    @Test
+    public void test3(){
+        String[] str = new String[]{"AA","AA","AA"};
+
+//        for (int i = 0; i < str.length; i++) {
+//            str[i] = "GG";这里是直接对原有的字符串进行重新赋值操作
+//        }
+        for(String s : str){
+            s = "GG";//这里是先将原有字符串的值赋给s，然后修改的是s的值
+        }
+        for (int i = 0; i < str.length; i++) {
+            System.out.println(str[i]);
+        }
+    }
+}
+</pre>
+
+
+<h3>List接口</h3>
+
+<a href="List接口源码分析.txt">List接口</a>
+
+<pre>
+    @Test
+    public void test1(){
+        Collection coll = new ArrayList();
+        //add(),将参数添加到集合coll中
+        coll.add("AA");
+        coll.add("BB");
+        coll.add("HH");
+        coll.add(123);
+        //size()，获取添加的元素的个数
+        System.out.println(coll.size());
+
+        //addAll(Collection coll1)，将coll1中的元素添加到当前集合中
+        Collection coll1 = new ArrayList();
+        coll1.add(456);
+        coll1.add("cc");
+        coll.addAll(coll1);
+        System.out.println(coll.size());
+        System.out.println(coll);
+
+
+        //clear()
+        coll.clear();
+        //isEmpty()
+        System.out.println(coll.isEmpty());
+
+
+    }
+</pre>
+
+<pre>
+    @Test
+    public void test2(){
+        Collection coll2 = new ArrayList();
+        coll2.add("acb");
+        coll2.add(123);
+        coll2.add(345);
+
+        //1,contains(Object obj):判断当前集合中是否包含obj,调用obj所在对象的equals()方法，自定义的类，都要重写equals（）
+        boolean contains = coll2.contains(123);
+        System.out.println(contains);
+        //2,containsAll(Collection coll1)判断形参中接口所存的数据，是否都在调用该方法的集合中
+        Collection coll3 = Arrays.asList(123,345);
+        boolean containsAll = coll2.containsAll(coll3);
+        System.out.println(containsAll);
+
+    }
+</pre>
+
+<pre>
+    @Test
+    public void test3(){
+        //remove()从当前集合中删除obj元素
+        Collection coll4 = new ArrayList();
+        coll4.add(123);
+        coll4.add(234);
+        coll4.add(789);
+        coll4.add("ABC");
+//        coll4.remove("ABC");
+//        System.out.println(coll4);
+
+//        //removeAll(Collection coll1)从当前集合中移除coll1中包含的元素
+//        Collection coll5 = Arrays.asList(123,234);
+//        coll4.removeAll(coll5);
+//        System.out.println(coll4);
+
+//        //retainAll()
+//        Collection coll6 = Arrays.asList(123,234,678);
+//        coll4.retainAll(coll6);
+//        System.out.println(coll4);
+
+        //equals(Object obj)判断当前集合和形参集合是否相同
+        Collection coll7 = new ArrayList();
+        coll7.add(123);
+        coll7.add(234);
+        coll7.add(789);
+        coll7.add("ABC");
+        System.out.println(coll7.equals(coll4));
+
+    }
+</pre>
+
+<pre>
+    @Test
+    public void test4(){
+        Collection coll8 = new ArrayList();
+        coll8.add(123);
+        coll8.add(234);
+        coll8.add(789);
+        coll8.add("ABC");
+
+        //hashCode()返回当前对象的哈希值
+        System.out.println(coll8.hashCode());
+
+        //集合----->数组 toArray()
+        Object[] arr = coll8.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
+        System.out.println("");
+
+        //数组----->集合,调用Arrays类的静态方法asList（）
+        List<String> strings = Arrays.asList(new String[]{"AA", "BB"});
+        System.out.println(strings);
+
+        //iterator():返回Iterator接口的实例，用于遍历集合元素
+    }
+</pre>
+
+
+
+
+
+<h3>Set接口</h3>
+
+<a href="Set接口源码分析.txt">Set接口</a>
+
+
+<h4>Set接口的常用方法</h4>
+
+<p>说明：Set接口中没有声明新的方法，都是使用的Collection中的方法<br>
+所以，对于Set接口更多的需要去理解他的无序性，这并不等于随机性</p>
+
+<pre>
+    public class SetTest {
+    /
+      set:存储无序的，不可重复的数据
+     
+      1，无序性：不等于随机性。存储的数据在底层数组中并非按照数组的索引数据进
+         行的添加。而是根据数据的哈希值决定的
+     
+     
+      2,不可重复性：保证添加的元素按照equals方法判断时不能返回ture，就是相同元素只能存在一个
+     
+      添加元素的过程，以HashSet为例说明：
+      我们向HashSet中添加元素a,首先调用元素a所在类的hashCode()方法，计算元素a的哈希值，
+      此哈希值接着通过某种算法计算出在HashSet底层数组中的存放位置（即为：索引位置，判断
+      数组此位置上是否已经元素：
+          如果此位置上没其他元素，则元素a添加成功。 --->情况1
+          如果此位置上其他元素b(或以链表形式存在的多个元素，则比较元素a与元素b的hash值：
+              如果hash值不相同，则元素a添加成功。--->情况2
+              如果hash值相同，进而需要调用元素a所在类的equals()方法：
+                     equals()返回true,元素a添加失败
+                     equals()返回false,则元素a添加成功。--->情况2
+     
+      对于添加成功的情况2和情况3而言：元素a 与已经存在指定索引位置上数据以链表的方式存储。
+      jdk 7 :元素a放到数组中，指向原来的元素。
+      jdk 8 :原来的元素在数组中，指向元素a
+      总结：七上八下
+     
+      HashSet底层：数组+链表的结构。（前提：jdk7)
+     
+     
+     
+     /
+
+    @Test
+    public void test1(){
+        Set set = new HashSet();
+        set.add(123);
+        set.add(234);
+        set.add("ABC");
+        set.add(new Person("Eric",21));
+        set.add(new Person("Eric",21));
+        set.add("MM");
+        set.add("GG");
+        set.add("ABC");
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+    @Test
+    public void test2(){
+        /
+          LinkedHashSet的使用
+          LinkedHashSet作为HashSet的子类，在添加数据的同时，每个数据还维护了两个引用，记录此数据的前后顺序
+          对于频繁遍历的操作，LinkedHashSet的效率会高一点
+        /
+        Set set = new LinkedHashSet();
+        set.add(123);
+        set.add(234);
+        set.add("ABC");
+        set.add(new Person("Eric",21));
+        set.add(new Person("Eric",21));
+        set.add("MM");
+        set.add("GG");
+        set.add("ABC");
+
+    }
+}
+
+</pre>
+
+<h5>TreeSet的使用说明</h5>
+
+<p>说明：在TreeSet中如果要存放自定义类的对象，必须重写equals方法和CompareTo方法</p>
+
+
+
+<pre>
+    public class TreeSetTest {
+    /
+      1，向TreeSet中添加的数据，要求是相同类的对象
+      1.自然排序中，比较两个对象是否相同的标准为：compareTo()返回0.不再是equals().
+      2.定制排序中，比较两个对象是否相同的标准为：compare()返回0.不再是equals().
+     /
+    @Test
+    public void test(){
+        TreeSet set = new TreeSet();
+
+        set.add(12);
+        set.add(23);
+        set.add(34);
+        set.add(56);
+        set.add(1);
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+    }
+    @Test
+    public void test1(){
+        TreeSet set = new TreeSet();
+
+        set.add(12);
+        set.add(23);
+        set.add(34);
+        set.add(56);
+        set.add(1);
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+    }
+    @Test
+    public void test2(){
+        TreeSet set1 = new TreeSet();
+
+        set1.add(new Person("Like",20));
+        set1.add(new Person("Eric",30));
+        set1.add(new Person("Tom",40));
+        set1.add(new Person("Like",10));
+
+        Iterator iterator = set1.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+}
+
+</pre>
+
+<pre>//自定义类
+package cn.hanamura.collection1;
+
+import java.util.Objects;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-14-2:22 PM
+  @description
+ /
+public class Person implements Comparable{
+    private String name;
+    private int age;
+
+    public Person() {
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    //按照姓名从小到大排序
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Person){
+            Person p = (Person)o;
+            int compare = this.name.compareTo(p.name);
+            if(compare != 0){
+                return compare;
+            }else{
+                return Integer.compare(this.age,p.age);//如果两个字符串（即名字）相同，则判断他们的年领
+            }
+
+        }else{
+            throw new RuntimeException("输入的类型不匹配");
+        }
+    }
+}
+
+</pre>
+
+<h5>常用的排序方式</h5>
+
+<pre>
+    //方式一：自然排序
+@Test
+    public void test1(){
+        TreeSet set = new TreeSet();
+
+        //失败：不能添加不同类的对象
+//        set.add(123);
+//        set.add(456);
+//        set.add("AA");
+//        set.add(new User("Tom",12));
+
+            //举例一：
+//        set.add(34);
+//        set.add(-34);
+//        set.add(43);
+//        set.add(11);
+//        set.add(8);
+
+        //举例二：
+        set.add(new User("Tom",12));
+        set.add(new User("Jerry",32));
+        set.add(new User("Jim",2));
+        set.add(new User("Mike",65));
+        set.add(new User("Jack",33));
+        set.add(new User("Jack",56));
+
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+    }
+
+//方式二：定制排序
+    @Test
+    public void test2(){
+        Comparator com = new Comparator() {
+            //照年龄从小到大排列
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(o1 instanceof User && o2 instanceof User){
+                    User u1 = (User)o1;
+                    User u2 = (User)o2;
+                    return Integer.compare(u1.getAge(),u2.getAge());
+                }else{
+                    throw new RuntimeException("输入的数据类型不匹配");
+                }
+            }
+        };
+
+        TreeSet set = new TreeSet(com);
+        set.add(new User("Tom",12));
+        set.add(new User("Jerry",32));
+        set.add(new User("Jim",2));
+        set.add(new User("Mike",65));
+        set.add(new User("Mary",33));
+        set.add(new User("Jack",33));
+        set.add(new User("Jack",56));
+
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+
+</pre>
+
+<h3>Map 接口</h3>
+
+<a href="Map接口源码分析.txt"></a>
+
+<ul>
+    <li>Map:双列数据，存储key-value对的数据 ---类似于高中的函数：y = f(x)</li>
+    <ol>
+        <li>HashMap:作为Map的主要实现类；线程不安全的，效率高；存储null的key和value</li>
+        <ul>
+            <li>LinkedHashMap:保证在遍历map元素时，可以照添加的顺序实现遍历。<br>
+            原因：在原的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元</li>
+        </ul>
+        <li>TreeMap:保证照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序。底层使用红黑树</li>
+        <li>Hashtable:作为古老的实现类；线程安全的，效率低；不能存储null的key和value</li>
+        <ul>
+            <li>Properties:常用来处理配置文件。key和value都是String类型</li>
+        </ul>
+    </ol>
+</ul>
+
+<h4>对Map存储结构的理解</h4>
+
+<ul>
+    <li>Map中的key:无序的、不可重复的，使用Set存储所的key ---> key所在的类要重写equals()和hashCode() （以HashMap为例)</li>
+    <li>Map中的value:无序的、可重复的，使用Collection存储所的value --->value所在的类要重写equals()</li>
+    <li>一个键值对：key-value构成了一个Entry对象。</li>
+    <li>Map中的entry:无序的、不可重复的，使用Set存储所的entry</li>
+</ul>
+
+<h4>Map 接口的相关方法</h4>
+
+<pre>
+    package cn.hanamura.collection1;
+
+import org.junit.Test;
+
+import java.util.;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-15-9:28 AM
+  @description
+  |----Map:双列数据。存储key-value键值对
+      |----HashMap:作为Map的主要实现类，线程不安全，效率高，可以存储null的key-value
+          |----LinkedHashMap:作为HashMap的子类，保证再遍历map元素是，可以按照添加的顺序实现遍历
+               对于频繁的遍历操作，可以考虑使用LinkedHashMap
+      |----TreeMap:保证添加的键值对，能够实现排序遍历（按照key去排序 ）
+      |----Hashtable:作为Map的古老实现类，线程不安全，效率低
+          |----Properties:
+  HashMap的底层：数组+链表  （jdk7及之前)
+                     数组+链表+红黑树 （jdk 8)
+ 
+  1. HashMap的底层实现原理？
+  2. HashMap 和 Hashtable的异同？
+  3. CurrentHashMap 与 Hashtable的异同？（暂时不讲)
+ 
+  >Map中的key:无序的、不可重复的，使用Set存储所的key  ---> key所在的类要重写equals()和hashCode() （以HashMap为例)
+  >Map中的value:无序的、可重复的，使用Collection存储所的value --->value所在的类要重写equals()
+  > 一个键值对：key-value构成了一个Entry对象。
+  >Map中的entry:无序的、不可重复的，使用Set存储所的entry
+ 
+ 
+ 
+ /
+public class MapTest {
+    @Test
+    public void test(){
+        Map map = new HashMap();
+        map.put(null,null);
+    }
+    @Test//方法的测试
+    public void test1(){
+        //添加Object put(Object obj,Object value),将指定的key-value添加到当前map重
+        //void putAll(Map m),将m中所有的键值对添加到当前map当中
+        Map map = new HashMap();
+        map.put("AA",123);
+        Map map1 = new HashMap();
+        map1.put("BB",12);
+        map1.put("CC",678);
+        map1.put("BB",89);
+        map.putAll(map1);
+        System.out.println(map);//{AA=123, BB=89, CC=678}
+        //删除Object remove(Object obj)
+        Object cc = map.remove("CC");
+        System.out.println(map);//{AA=123, BB=89}
+        //修改Object clear()
+        map.clear();
+        System.out.println(map);//{}
+    }
+    @Test//元素查询的方法
+    public void test2(){
+        Map map = new HashMap();
+        map.put("AA",123);
+        map.put("BB",12);
+        map.put("CC",678);
+        map.put("BB",89);
+
+        //Object get(Object obj)
+        System.out.println(map.get("CC"));
+        //containsKey()
+        System.out.println(map.containsKey("BB"));
+        //containValue()
+        System.out.println(map.containsValue(678));
+        //size
+        //isEmpty()判断当前map是否为空
+        map.clear();
+        System.out.println(map.isEmpty());
+        //equals()判断当前map和参数对象obj是否相等
+    }
+    @Test
+    public void test3(){
+        Map map = new HashMap();
+        map.put("AA",123);
+        map.put("BB",12);
+        map.put("CC",678);
+        map.put("BB",89);
+
+        //遍历所有的key
+        Set set = map.keySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+        //遍历所有的value
+        Collection values = map.values();
+        for(Object obj : values){
+            System.out.println(obj);
+        }
+        //遍历所有的key-values,entrySet()
+        //方式一：
+        Set set1 = map.entrySet();
+        for(Object obj : set1){
+            System.out.println(obj);
+        }
+    }
+}
+
+</pre>
+
+<h4>TreeMap的使用说明</h4>
+
+<pre>
+    package cn.hanamura.collection1;
+
+import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-15-3:55 PM
+  @description
+ /
+public class TreeMapTest {
+    @Test
+            public void test(){
+        //向TreeMap中添加key-value，要求key必须是由同一个类创建的对象
+        TreeMap map = new TreeMap();
+        Person p1 = new Person("Tom",23);
+        Person p2 = new Person("Like",21);
+        Person p3 = new Person("Mike",25);
+        Person p4 = new Person("Eric",29);
+
+        map.put(p1,89);
+        map.put(p2,79);
+        map.put(p3,86);
+        map.put(p4,90);
+
+        Set set = map.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+
+
+}
+
+</pre>
+
+<h3>Collections 工具类</h3>
+
+<pre>
+    package cn.hanamura.collections;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+/
+  @author Eric    Email: doeric@sina.com
+  @creat 2020-10-15-4:32 PM
+  @description
+  操作Collection和map的工具类
+ 
+  面试题：
+  Collection和Collections的区别？
+ 
+  reverse(List)：反转 List 中元素的顺序
+  shuffle(List)：对 List 集合元素进行随机排序
+  sort(List)：根据元素的自然顺序对指定 List 集合元素升序排序
+  sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序
+  swap(List，int， int)：将指定 list 集合中的 i 处元素和 j 处元素进行交换
+  Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素
+  Object max(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素
+  Object min(Collection)
+  Object min(Collection，Comparator)
+  int frequency(Collection，Object)：返回指定集合中指定元素的出现次数
+  void copy(List dest,List src)：将src中的内容复制到dest中
+  boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替换 List 对象的所旧值
+ 
+ 
+ /
+public class CollectionsTest {
+    @Test
+    public void test(){
+        List list = new ArrayList();
+        list.add(123);
+        list.add(345);
+        list.add("ABC");
+        list.add("dfg");
+        list.add(4567);
+
+        System.out.println(list);
+        //reverse(List)：反转 List 中元素的顺序
+        Collections.reverse(list);
+        System.out.println(list);
+        //shuffle(List)：对 List 集合元素进行随机排序
+        Collections.shuffle(list);
+        System.out.println(list);
+
+
+
+    }
+}
+
+</pre>
+
+<h2 id="12">Java 泛型</h2>
+
+<h3>泛型的理解</h3>
+
+<p>
+    说明：所谓泛型，就是允许在定义类、接口时通过一个标识表示类中某个属性的类型或者是某个方法的返回值及参数类型。这个类型参数将在使用时（例如，继承或实现这个接口，用这个类型声明变量、创建对象时确定（即传入实际的类型参数，也称为类型实参）。
+</p>
+
+<h3>泛型在集合中的使用</h3>
+
+<pre>
+    @Test
+    public void test2(){
+       ArrayList &lt;Integer&gt; list =  new ArrayList&lt;Integer&gt;();
+
+        list.add(78);
+        list.add(87);
+        list.add(99);
+        list.add(65);
+        //编译时，就会进行类型检查，保证数据的安全
+//        list.add("Tom");
+
+        //方式一：
+//        for(Integer score : list){
+//            //避免了强转操作
+//            int stuScore = score;
+//
+//            System.out.println(stuScore);
+//
+//        }
+        //方式二：
+        Iterator&lt;Integer&gt; iterator = list.iterator();
+        while(iterator.hasNext()){
+            int stuScore = iterator.next();
+            System.out.println(stuScore);
+        }
+
+    }
+
+</pre>
+
+<pre>
+    //在集合中使用泛型的情况：以HashMap为例
+    @Test
+    public void test3(){
+//        Map&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();
+        //jdk7新特性：类型推断
+        Map&lt;String,Integer&gt; map = new HashMap&lt;&gt;();
+
+        map.put("Tom",87);
+        map.put("Jerry",87);
+        map.put("Jack",67);
+
+//        map.put(123,"ABC");
+        //泛型的嵌套
+        Set&lt;Map.Entry&lt;String,Integer&gt;&gt; entry = map.entrySet();
+        Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; iterator = entry.iterator();
+
+        while(iterator.hasNext()){
+            Map.Entry&lt;String, Integer&gt; e = iterator.next();
+            String key = e.getKey();
+            Integer value = e.getValue();
+            System.out.println(key + "----" + value);
+        }
+
+    }
+
+</pre>
+
+<h4>在集合中使用泛型的总结</h4>
+
+<ol>
+    <li>集合接口或集合类在jdk5.0时都修改为带泛型的结构。</li>
+    <li>在实例化集合类时，可以指明具体的泛型类型</li>
+    <li>指明完以后，在集合类或接口中凡是定义类或接口时，内部结构（比如：方法、构造器、属性等）使用到类的泛型的位置，都指定为实例化的泛型类型。</li>
+    <li>注意点：泛型的类型必须是类，不能是基本数据类型。需要用到基本数据类型的位置，拿包装类替换</li>
+    <li>如果实例化时，没指明泛型的类型。默认类型为java.lang.Object类型。</li>
+</ol>
+
+<h3>自定义泛型类、泛型接口、泛型方法</h3>
+
+<pre>
+package cn.hanamura.generic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @Package: cn.hanamura.generic
+ * @ClassName: Order
+ * @Author: Eric Lee
+ * @CreateTime: 10/16/2020 11:03 AM
+ * @Description:
+ */
+public class Order&lt;T&gt; {
+    String name;
+    int age;
+
+    //类的内部就可以使用泛型结构
+    //有些时候属性的类型不太确定，这个时候就可以使用泛型来定义这个属性，
+    //类的内部结构就可以使用这个泛型
+    T orderT;
+
+    public Order(){};
+
+    public Order(String name, int age, T orderT) {
+        this.name = name;
+        this.age = age;
+        this.orderT = orderT;
+    }
+
+    public T getOrderT() {
+        return orderT;
+    }
+
+    public void setOrderT(T orderT) {
+        this.orderT = orderT;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", orderT=" + orderT +
+                '}';
+    }
+
+    //泛型方法，在方法中出现了泛型的结构，泛型的参数与类的泛型的参数没有任何关系
+    //也就是说，泛型方法的类是不是泛型类都没有管理
+    //泛型方法可以声明为静态的，原因是，泛型参数是在调用的时候调用的，并不是实例化的时候调用的
+    public &lt; E &gt; List&lt; E &gt; copyFromArrayToList(E[] arr){
+        ArrayList&lt; E &gt; list = new ArrayList&lt;&gt;();
+
+        for(E e : arr){
+            list.add(e);
+        }
+        return list;
+    }
+
+}
+
+
+
+</pre>
+
+<pre>
+    public class SubOrder extends Order&lt;Integer&gt;{//这里的suborder类不是泛型类
+
+    
+    }
+
+    // SubOrder&lt;Integer&gt; o = new SubOrder&lt;Integer&gt;();//所以这里的实例化形式时错误的
+
+
+</pre>
+
+<pre>
+    public class SubOrder&lt;T &gt; extends Order&lt;T &gt;{//这里的suborder&lt;T &gt;类任然是泛型类
+    
+    }
+
+    SubOrder&lt;Integer&gt; o = new SubOrder&lt;Integer&gt;();//它可以拥有这样子的实例化
+</pre>
+
+<h4>相关测试代码</h4>
+
+<pre>
+    @Test
+    public void test1(){
+        //如果定义了泛型类，实例化没指明类的泛型，则认为此泛型类型为Object类型
+        //要求：如果大家定义了类是带泛型的，建议在实例化时要指明类的泛型。
+        Order order = new Order();
+        order.setOrderT(123);
+        order.setOrderT("ABC");
+
+        //建议：实例化时指明类的泛型
+        Order&lt;String&gt; order1 = new Order&lt;String&gt;("orderAA",1001,"order:AA");
+
+        order1.setOrderT("AA:hello");
+
+    }
+
+    @Test
+    public void test2(){
+        SubOrder sub1 = new SubOrder();
+        //由于子类在继承带泛型的父类时，指明了泛型类型。则实例化子类对象时，不再需要指明泛型。
+        sub1.setOrderT(1122);
+
+        SubOrder1&lt;String&gt; sub2 = new SubOrder1&lt;&gt;();
+        sub2.setOrderT("order2...");
+    }
+
+    @Test
+    public void test3(){
+
+        ArrayList&lt;String&gt; list1 = null;
+        ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+        //泛型不同的引用不能相互赋值。
+//        list1 = list2;
+
+        Person p1 = null;
+        Person p2 = null;
+        p1 = p2;
+
+
+    }
+
+    //测试泛型方法
+    @Test
+    public void test4(){
+        Order&lt;String&gt; order = new Order&lt;&gt;();
+        Integer[] arr = new Integer[]{1,2,3,4};
+        //泛型方法在调用时，指明泛型参数的类型。
+        List&lt;Integer&gt; list = order.copyFromArrayToList(arr);
+
+        System.out.println(list);
+    }
+
+</pre>
+
+<h3>泛型在继承性上的体现</h3>
+
+<pre>
+    /*
+    1. 泛型在继承方面的体现
+
+      虽然类A是类B的父类，但是G&lt;A&gt; 和G&lt;B&gt;二者不具备子父类关系，二者是并列关系。
+
+       补充：类A是类B的父类，A&lt;G&gt; 是 B&lt;G&gt; 的父类
+
+     */
+    @Test
+    public void test1(){
+
+        Object obj = null;
+        String str = null;
+        obj = str;
+
+        Object[] arr1 = null;
+        String[] arr2 = null;
+        arr1 = arr2;
+        //编译不通过
+//        Date date = new Date();
+//        str = date;
+        List&lt;Object&gt; list1 = null;
+        List&lt;String&gt; list2 = new ArrayList&lt;String&gt;();
+        //此时的list1和list2的类型不具子父类关系
+        //编译不通过
+//        list1 = list2;
+        /*
+        反证法：
+        假设list1 = list2;
+           list1.add(123);导致混入非String的数据。出错。
+
+         */
+
+        show(list1);
+        show1(list2);
+
+    }
+
+
+
+    public void show1(List&lt;String&gt; list){
+
+    }
+
+    public void show(List&lt;Object&gt; list){
+
+    }
+
+    @Test
+    public void test2(){
+
+        AbstractList&lt;String&gt; list1 = null;
+        List&lt;String&gt; list2 = null;
+        ArrayList&lt;String&gt; list3 = null;
+
+        list1 = list3;
+        list2 = list3;
+
+        List&lt;String&gt; list4 = new ArrayList&lt;&gt;();
+
+    }
+
+</pre>
+
+<h3>通配符</h3>
+
+<h4>普通通配符</h4>
+
+<pre>
+    /*
+    通配符的使用
+       通配符：?
+
+       类A是类B的父类，G&lt;A&gt;和G&lt;B&gt;是没关系的，二者共同的父类是：G&lt;?&gt;
+
+
+     */
+
+    @Test
+    public void test3(){
+        List&lt;Object&gt; list1 = null;
+        List&lt;String&gt; list2 = null;
+
+        List&lt;?&gt; list = null;//作为上面两个数据类型之间的桥梁，相当于是二者的通用父类
+
+        list = list1;
+        list = list2;
+        //编译通过
+//        print(list1);
+//        print(list2);
+
+
+        //
+        List&lt;String&gt; list3 = new ArrayList&lt;&gt;();
+        list3.add("AA");
+        list3.add("BB");
+        list3.add("CC");
+        list = list3;
+        //添加(写入)：对于List&lt;?&gt;就不能向其内部添加数据。
+        //除了添加null之外。
+//        list.add("DD");
+//        list.add('?');
+
+        list.add(null);
+
+        //获取(读取)：允许读取数据，读取的数据类型为Object。
+        Object o = list.get(0);
+        System.out.println(o);
+
+
+    }
+
+    public void print(List&lt;?&gt; list){
+        Iterator&lt;?&gt; iterator = list.iterator();
+        while(iterator.hasNext()){
+            Object obj = iterator.next();
+            System.out.println(obj);
+        }
+    }
+
+</pre>
+
+<h4>有限制条件的通配符</h4>
+
+<pre>
+    @Test
+    public void test3() {
+        List&lt;? extends Person&gt; list1 = null;//这里的list1可以考虑为，Person和Student
+        List&lt;? super Person&gt; list2 = null;//这里的list2可以考虑为，Person和Object
+
+        List&lt;Person&gt; list3 = null;
+        List&lt;Student&gt; list4 = null;
+        List&lt;Object&gt; list5 = null;
+
+        list1 = list3;
+        list1 = list4;
+        // list1 = list5;  这个是不允许的
+        //读取数据
+        // 这里可以将得到的数据赋值给Person对象，其实也可以赋值给Object对象
+        Person person = list1.get(0);
+        Object obj = list1.get(0);
+
+        list2 = list3;
+        // list2 = list4;  这个是不允许的
+        list2 = list5;
+        //但这里却只能赋值给Object
+        Object object = list2.get(0);
+
+        //写入数据
+        //由于？代表的类有可能比Student还小，所以，list1是不能写入的
+        //list1.add(new Student());
+
+        //这里可以写入
+        list2.add(new Person());
+        list2.add(new Student());
+
+
+    }
+</pre>
+
+<h2 id="13">java IO流</h2>
+
+<h3>File类的使用</h3>
+
+
+<h4>File类的理解</h4>
+<ol>
+    <li>File类的一个对象，代表一个文件或一个文件目录(俗称：文件夹)</li>
+    <li>File类声明在java.io包下</li>
+    <li>File类中涉及到关于文件或文件目录的创建、删除、重命名、修改时间、文件大小等方法，
+    并未涉及到写入或读取文件内容的操作。如果需要读取或写入文件内容，必须使用IO流来完成。</li>
+    <li>后续File类的对象常会作为参数传递到流的构造器中，指明读取或写入的"终点".</li>
+</ol>
+
+<h4>File类的实例化</h4>
+<ol>
+    <li>常用构造器</li>
+    <ul>
+        <li>File(String filePath)</li>
+        <li>File(String parentPath,String childPath)</li>
+        <li>File(File parentFile,String childPath)</li>
+    </ul>
+    <li>路径的分类</li>
+    <ul>
+        <li>相对路径：相较于某个路径下，指明的路径。</li>
+        <li>绝对路径：包含盘符在内的文件或文件目录的路径</li>
+    </ul>
+</ol>
+
+<h5>说明：</h5>
+<ol>
+    <li>IDEA中：</li>
+    <ul>
+        <li>如果大家开发使用JUnit中的单元测试方法测试，相对路径即为当前Module下。</li>
+        <li>如果大家使用main()测试，相对路径即为当前的Project下。</li>
+    </ul>
+    <li>Eclipse中：</li>
+    <ul>
+        <li>不管使用单元测试方法还是使用main()测试，相对路径都是当前的Project下。</li>
+    </ul>
+</ol>
+
+<h4>File类的常用方法</h4>
+
+<pre>
+    package cn.hanamura.io.file;
+
+import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * @Package: cn.hanamura.IO
+ * @ClassName: FileTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/17/2020 10:36 AM
+ * @Description:
+ * File类的使用：
+ * 1，File类的一个对象，代表一个文件或一个文件目录（俗称，文件夹）
+ * 2，File类声明在java.io包下
+ * 3，File类中涉及到关于文件或文件目录的创建，删除，重命名，修改时间，文件大小等方法，
+ *     但如果要设计到修改文件内容，需要涉及到IO流
+ * 4，File类的对象，常作为参数传递到流的构造器中，指明读取或写入的节点
+ */
+public class FileTest {
+    /**
+     * 1，如何获取FIle类的实例
+     * 2，相对路径
+     *    绝对路径
+     * 3，路径分割符
+     *     Windows：\\
+     *     Unix:/
+     */
+    @Test
+    public void test(){
+        //构造器1：创建文件
+        File file = new File("text.txt");
+        System.out.println(file);
+        //构造器2：创建文件目录
+        File file1 = new File("D:\\IDEA\\workspace_IDEA01","JavaSenior");
+        System.out.println(file1);
+        //构造器3：
+        File file2 = new File(file1,"hi.txt");
+        System.out.println(file2);
+
+        //以上创建不涉及硬盘层面，只是建立了一个对象
+
+    }
+
+    /**
+     * File的获取功能
+     */
+    @Test
+    public void test1(){
+        File file1 = new File("hello.txt");
+        File file2 = new File("D:\\IDEA\\workspace_IDEA01\\nihao.txt");
+
+        System.out.println(file1.getAbsolutePath());
+        System.out.println(file1.getPath());
+        System.out.println(file1.getName());
+        System.out.println(file1.getParent());
+        System.out.println(file1.length());
+        System.out.println(file1.lastModified());
+
+        System.out.println("*****************");
+
+        System.out.println(file2.getAbsolutePath());
+        System.out.println(file2.getPath());
+        System.out.println(file2.getName());
+        System.out.println(file2.getParent());
+        System.out.println(file2.length());
+        System.out.println(file2.lastModified());
+
+
+
+    }
+    @Test
+    public void test3(){
+        File file3 = new File("D:\\IDEA\\workspace_IDEA01\\Eric");
+        String[] list = file3.list();
+        for(String str : list){
+            System.out.println(str);
+        }
+
+        System.out.println("*****************");
+
+        File[] files = file3.listFiles();
+        for(File f : files){
+            System.out.println(f);
+        }
+    }
+    @Test
+    /**
+     * public boolean renameTo(File dest):把文件重命名为指定的文件路径
+     * 比如：file1.renameTo(file2)为例
+     *     要保证 返回true，要使file1在硬盘中是存在的，而file2是不存在的
+     */
+    public void test4(){
+        File file = new File("hello.test");
+        File file1 = new File("D:\\io\\hi.txt");
+
+        boolean renameTo = file.renameTo(file1);
+    }
+    @Test
+    /**
+     * 判断功能
+     */
+    public void test5(){
+        File file = new File("hello.txt");
+        File file1 = new File("d:\\io\\hello1.txt");
+
+        System.out.println(file.isDirectory());
+        System.out.println(file.isFile());
+        System.out.println(file.exists());
+        System.out.println(file.canRead());
+        System.out.println(file.canWrite());
+        System.out.println(file.isHidden());
+    }
+    @Test
+    /**
+     * File 类的创建功能和删除功能
+     * File创建文件
+     */
+    public void test6() throws IOException {
+        File file = new File("hi.txt");
+        if(file.exists()){
+            file.createNewFile();
+            System.out.println("创建成功");
+        }else{
+            file.delete();
+            System.out.println("删除成功");
+        }
+    }
+    @Test
+    /**
+     * File 类的创建功能和删除功能
+     * File创建目录
+     */
+    public void test7(){
+        File file1 = new File("D:\\20201017\\1017\\17");
+        boolean mkdir = file1.mkdir();
+        if(mkdir){
+            System.out.println("创建成功1");
+        }
+
+        File file2 = new File("D:\\20201017\\1017\\16");
+        boolean mkdir1 = file2.mkdirs();
+        if(mkdir1){
+            System.out.println("创建成功2");
+        }
+
+
+    }
+
+}
+
+</pre>
+
+<h3>IO流概述</h3>
+
+<h4>流的分类</h4>
+
+<ol>
+    <li>操作数据单位：字节流、字符流</li>
+    <li>数据的流向：输入流、输出流</li>
+    <li>流的角色：节点流、处理流</li>
+</ol>
+
+<h4>重点说明的几个流的过程</h4>
+
+<table border="1" cellspacing="0">
+    <tr>
+        <td>抽象基类</td>
+        <td>节点流（或文件流）</td>
+        <td>缓冲流（处理流的一种）</td>
+    </tr>
+    <tr>
+        <td>InputStream</td>
+        <td>FileInputStream</td>
+        <td>BufferdInputStream</td>
+    </tr>
+    <tr>
+        <td>OutputStream</td>
+        <td>FileOutputStream</td>
+        <td>BufferdOutputStream</td>
+    </tr>
+    <tr>
+        <td>Reader</td>
+        <td>FileReader</td>
+        <td>BufferdReader</td>
+    </tr>
+    <tr>
+        <td>Writer</td>
+        <td>FileWriter</td>
+        <td>BufferdWriter</td>
+    </tr>
+</table>
+
+<h4>输入输出的标准化过程</h4>
+
+<h5>标准化输入过程</h5>
+
+<ol>
+    <li>创建File类的对象，指明读取的数据的来源。（要求此文件一定要存在）</li>
+    <li>创建相应的输入流，将File类的对象作为参数，传入流的构造器中</li>
+    <li>具体的读入过程：创建相应的byte[] 或 char[]。</li>
+    <li>关闭流资源，说明：程序中出现的异常需要使用try-catch-finally处理。</li>
+</ol>
+
+<h5>标准化输出过程</h5>
+
+<ol>
+    <li>创建File类的对象，指明写出的数据的位置。（不要求此文件一定要存在）</li>
+    <li>创建相应的输出流，将File类的对象作为参数，传入流的构造器中</li>
+    <li>具体的写出过程：write(char[]/byte[] buffer,0,len)</li>
+    <li>关闭流资源，说明：程序中出现的异常需要使用try-catch-finally处理。</li>
+</ol>
+
+<h4>节点流的使用</h4>
+
+<pre>
+    package cn.hanamura.io.filereadwrite;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.filereadwrite
+ * @ClassName: FileReadWriteTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/17/2020 4:06 PM
+ * @Description: 1，流的分类
+ * （1），操作单位不同：字节流，字符流
+ * （2），数据的流向不同：输入流，输出流
+ * （3），流的角色不同：节点流，处理流
+ * 
+ * 2，流的体系结构
+ * 抽象基类             节点流（文件流）            缓冲流（处理流的一种）
+ * InputStream         FileInputStream         BufferedInputStream
+ * OutputStream        FileOutputStream        BufferedOutputStream
+ * Reader              FileReader              BufferedReader
+ * Writer              FileWriter              BufferedWrite
+ */
+public class FileReadWriteTest {
+    /**
+     * 将hello.txt文件中的内容读入程序中，指明要操作的文件
+     * 
+     * 知识点：
+     * 1，read()方法的理解：
+     * 2，异常的处理：为了保证流资源一定可执行关闭操作，需要使用try-catch-finally处理
+     * 3，读入的文件一定要存在，否则就会报FileNotFoundException异常
+     */
+    @Test
+    public void test1() {
+        FileReader fr = null;
+        try {
+            //1，实例化File类的对象，指明要操作的文件
+            File file = new File("hello.txt");
+            //2，提供具体的流
+            fr = new FileReader(file);
+            //3，数据的读入
+            // read();  返回读入的一个字符，如果达到文件末尾则返回-1
+            int data = fr.read();
+            while (data != -1) {
+                System.out.print((char) data);
+                data = fr.read();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fr != null)
+                    //4，流的关闭操作
+                    fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //对read()操作升级：使用read的重载方法
+    //read(char[] cbuf); 返回每次读入数组中的字符的个数。如果达到文件末尾，返回-1
+    @Test
+    public void testFileReader1(){
+        FileReader fr = null;
+        try {
+            //1，File类的实例化
+            File file = new File("hello.txt");
+            //2，FileReader流的实例化
+            fr = new FileReader(file);
+            //3，读入的操作
+            char[] cbuf = new char[5];
+            int len;
+            while((len = fr.read(cbuf)) != -1){
+                //错误的
+//                for (int i = 0; i &lt; cbuf.length; i++) {
+//                    System.out.println(cbuf[i]);
+//                }
+                //争取的
+                for(int i = 0;i &lt; len;i++){
+                    System.out.print(cbuf[i]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fr != null){
+                //4，资源的关闭
+                try {
+                    fr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+    @Test
+    /**
+     * 说明：
+     * 1，输出操作对应的file是可以不存在的，
+     *     如果不存在，在输出的工程中会自动创建
+     *     如果存在：
+     *         如果流使用的构造器是：FileWriter(file,false)/FileWriter(file),则覆盖原有文件
+     *         如果使用的构造器是：FileWriter(file,true)，则在文件中追加内容
+     *
+     *
+     */
+    public void testFileWriter(){
+        FileWriter fw = null;//FileWruter()，在路径后面可以添加参数True或者false，代表是否append
+        try {
+            //1，提供File类的对象，提供写出到的文件
+            File file = new File("hello1.txt");
+
+            //2，提供FileWriter的对象，用于数据的写出
+            fw = new FileWriter(file);
+
+            //3，写出的具体操作
+            fw.write("I have a dream\n");
+            fw.write("you should have a dream,too");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fw != null){
+                //4，流资源的关闭操作
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+
+    }
+    @Test
+    public void testFileReaderWriter(){
+        FileReader fr = null;
+        FileWriter fw = null;
+        try {
+            //1，创建File类的对象
+            File fileReader = new File("hi.txt");
+            File fileWriter = new File("hi1.txt");
+            //2，提供FileReader类的对象，用于数据的读入
+            //   提供FileWriter类的对象，用于数据的写出
+            fr = new FileReader(fileReader);
+            fw = new FileWriter(fileWriter);
+            //3，读入和写出的具体操作
+            char[] cbuf = new char[5];
+            int len;
+            while((len = fr.read(cbuf)) != -1){
+                fw.write(cbuf,0,len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //4，流资源的关闭
+            try {
+                if(fw != null)
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(fr != null)
+                    fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+
+</pre>
+
+<pre>
+    package cn.hanamura.io.fileinoutputstream;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.fileinoutputstream
+ * @ClassName: FileInOutTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 8:56 AM
+ * @Description: FileInpuStream和FileOutPutStream
+ * 1，对于文本文件（.txt/.java/.py/.c/.cpp/...）使用字符流来处理
+ * 2，对于非文本文件(.jpg/.mp3/...)应该使用字节流处理
+ * 3，文本文件也可以用字节流进行复制
+ */
+public class FileInOutTest {
+    @Test
+    /**
+     * 实现图片的复制操作
+     *
+     */
+    public void testFileInOutPubtStream(){
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            //1，创建File的对象
+            File fileInput = new File("picture.png");
+            File fileOutput = new File("picture1.png");
+            //2，创建FileInputStream和FileOutputStream的对象
+            fis = new FileInputStream(fileInput);
+            fos = new FileOutputStream(fileOutput);
+            //3，具体的复制操作
+            byte[] bytes = new byte[5];
+            int len;
+            while ((len = fis.read(bytes)) != -1) {
+                fos.write(bytes, 0, len);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {//4，流资源的关闭
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+
+    }
+    //指定路径下文件的复制操作
+    public void copyFile(String srcpath,String descpath){
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            //1，创建File的对象
+            File fileInput = new File(srcpath);
+            File fileOutput = new File(descpath);
+            //2，创建FileInputStream和FileOutputStream的对象
+            fis = new FileInputStream(fileInput);
+            fos = new FileOutputStream(fileOutput);
+            //3，具体的复制操作
+            byte[] bytes = new byte[1024];
+            int len;
+            while ((len = fis.read(bytes)) != -1) {
+                fos.write(bytes, 0, len);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {//4，流资源的关闭
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+
+    }
+    @Test
+    public void test(){
+        String srcpath = "C:\\Users\\Hanamura\\Videos\\Captures\\lscs.png";
+        String descpath = "C:\\Users\\Hanamura\\Videos\\Captures\\lscs1.png";
+
+        long start = System.currentTimeMillis();
+        copyFile(srcpath,descpath);
+        long end = System.currentTimeMillis();
+        System.out.println("花费的时间为：" + (end - start));
+
+    }
+
+}
+
+</pre>
+
+<h4>缓冲流的使用</h4>
+
+<pre>
+package cn.hanamura.io.buffered;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.buffered
+ * @ClassName: BufferedTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 9:57 AM
+ * @Description:
+ * 1，缓冲流：
+ * BufferedInputStream
+ * BufferedOutputStream
+ * BufferedReader
+ * BufferedWrite
+ *
+ * 2，作用：提高流的读入写出的速度
+ *
+ *
+ */
+public class BufferedTest {
+    @Test
+    public void testBuffered(){
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+        try {
+            //1，造文件
+            File srcFile = new File("picture.png");
+            File descFile = new File("picture2.png");
+            //2，造流
+            //2.1 造节点流
+            FileInputStream fis = new FileInputStream(srcFile);
+            FileOutputStream fos = new FileOutputStream(descFile);
+            //2.2 造处理流
+            bis = new BufferedInputStream(fis);
+            bos = new BufferedOutputStream(fos);
+            //3，具体的复制操作
+            byte[] bytes = new byte[1024];
+            int len;
+            while((len = bis.read(bytes)) != -1){
+                bos.write(bytes,0,len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //4，流资源的关闭
+            //要求：先关闭外层流再关闭内层流
+            if(bos != null){
+
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(bis != null){
+
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            //说明：关闭外层流的同时，内层流也会自动关闭。所以关于内层流的关闭，可以省略
+//        fos.close();
+//        fis.close();
+        }
+    }
+}
+
+</pre>
+
+<h4>转换流的使用</h4>
+
+<pre>
+    package cn.hanamura.io.shiftio;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.shiftio
+ * @ClassName: ShiftIoTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 10:59 AM
+ * @Description:
+ * 1，转换流：
+ * InputStreamReader 字节---》字符（解码）
+ * OutputStreamWriter 字符---》字节（编码）
+ * 2，提供字节流与字符流之间的转换
+ */
+public class ShiftIoTest {
+    @Test
+    public void test(){
+        InputStreamReader isr = null;
+        OutputStreamWriter osw = null;
+        try {
+            FileInputStream fis = new FileInputStream("hi.txt");
+            FileOutputStream fos = new FileOutputStream("hi_GBK.txt");
+            isr = new InputStreamReader(fis,"UTF-8");
+            osw = new OutputStreamWriter(fos,"GBK");
+
+            char[] cbuf = new char[1024];
+            int len;
+            while((len = isr.read(cbuf)) != -1){
+                System.out.println(cbuf);
+                osw.write(cbuf,0,len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(isr != null)
+                isr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(osw != null)
+                    osw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+
+</pre>
+
+<pre>
+    package cn.hanamura.io.shiftio;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.shiftio
+ * @ClassName: ShiftIoTest1
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 2:00 PM
+ * @Description:
+ */
+public class ShiftIoTest1 {
+    @Test
+    public void test() {
+        InputStreamReader isr = null;
+        OutputStreamWriter osw = null;
+        try {
+            //1，造文件
+            File src = new File("hi.txt");
+            File desc = new File("hic.txt");
+            //2，造流
+            //2.1 造节点流
+            FileInputStream fis = new FileInputStream(src);
+            FileOutputStream fos = new FileOutputStream(desc);
+            //2.2 造处理流（转换流）
+            isr = new InputStreamReader(fis);
+            osw = new OutputStreamWriter(fos);
+            //3，转换实现的具体操作
+            char[] cbuf = new char[1024];
+            int len;
+            while ((len = isr.read(cbuf)) != -1) {
+                osw.write(cbuf, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //4，流资源的关闭
+            if (osw != null) {
+                try {
+                    osw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
+}
+
+</pre>
+
+<h3>其他流</h3>
+
+<pre>
+    package cn.hanamura.io.otherio;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.otherio
+ * @ClassName: OtherStream
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 2:51 PM
+ * @Description: 1，标准的输入输出流：
+ * 1.1
+ * System.in:标准的输入流，默认从键盘输入
+ * System.out:标准的输出流，默认从控制台输出
+ * 1.2
+ * System类的setIn(InputStream is) / setOut(PrintStream ps)方式重新指定输入和输出的流。
+ * 1.3 练习
+ * 从键盘输入字符串，要求将读取到的整行字符串转换成大写输出，然后继续进行输入操作，
+ * 直至当输入“e”或者“exit”时，退出程序
+ * <p>
+ * <p>
+ * <p>
+ * 方法一：使用scanner
+ * 方法二：使用System.in实现
+ */
+public class OtherStream {
+    /*
+    从键盘输入字符串，要求将读取到的整行字符串转换成大写输出，然后继续进行输入操作，
+    直至当输入“e”或者“exit”时，退出程序
+     */
+    public static void main(String[] args) {
+        BufferedReader br = null;
+        try {
+            //
+            InputStreamReader isr = new InputStreamReader(System.in);
+            //由于这里的System.in属于InputStream,所以，需要将其转换为FileReader
+            //
+            br = new BufferedReader(isr);
+            //
+            while (true) {
+                System.out.println("请输入字符串：");
+                String s = br.readLine();
+                if ("e".equalsIgnoreCase(s) || "exit".equalsIgnoreCase(s)) {
+                    System.out.println("程序结束");
+                    break;
+                }
+                System.out.println(s.toUpperCase());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+
+    }
+
+
+}
+
+</pre>
+
+<h3>对象流</h3>
+
+<pre>
+    package cn.hanamura.io.objectio;
+
+import java.io.Serializable;
+
+/**
+ * @Package: cn.hanamura.io.objectio
+ * @ClassName: Person
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 4:16 PM
+ * @Description:
+ *
+ * Person类要满足如下要求才能序列化：
+ * 1.需要实现接口：Serializable
+ * 2.当前类提供一个全局常量：serialVersionUID
+ * 3.除了当前Person类需要实现Serializable接口之外，还必须保证其内部所属性
+ *   也必须是可序列化的。（默认情况下，基本数据类型可序列化）
+ *
+ */
+public class Person implements Serializable {
+    public static final long serialVersionUID = 43456782L;
+    private String name;
+    private int age;
+
+    public Person() {
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+</pre>
+
+<pre>
+    package cn.hanamura.io.objectio;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * @Package: cn.hanamura.io.objectio
+ * @ClassName: ObjectStreamTest
+ * @Author: Eric Lee
+ * @CreateTime: 10/19/2020 3:59 PM
+ * @Description: 对象流的使用
+ * ObjectInputStream
+ * ObjectOutputStream
+ */
+public class ObjectStreamTest {
+    /*
+    序列化过程：将内存中的java对象保存到磁盘中或者通过网络传输出去
+    使用后：ObjectOutputStream
+     */
+    @Test
+    public void test() {
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream("object.dat"));
+            oos.writeObject(new String("我爱中国"));
+            oos.flush();
+            oos.writeObject(new Person("Eric",21));
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    /*
+    反序列化过程：将磁盘文件中的对象，还原为内存中的一个Java层面的对象
+    使用：ObjectInputStream
+     */
+    @Test
+    public void test1(){
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("object.dat"));
+            Object o = ois.readObject();
+            String str = (String)o;
+            System.out.println(str);
+
+            Person p = (Person) ois.readObject();
+            System.out.println(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if(ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+}
+
+</pre>
+
+<h2 id="14">java 反射机制</h2>
+<h2 id="15">java java8新特性</h2>
+<h2 id="16">java java9 & java10新特性</h2>
+</div>
+</body>
 </html>
